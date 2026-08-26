@@ -66,18 +66,43 @@ Builds, signs with Developer ID, notarizes, staples, and writes `dist/Lidless.dm
 `--unsigned` skips all of that for local testing and produces a DMG that
 Gatekeeper will block.
 
-## Getting the certificate
+## The certificate
 
-Signing for distribution outside the App Store needs a **Developer ID Application**
-certificate. The App Store Connect API refuses to create one:
+Signed by **Bossa Nova Solutions (`AR7DXKP4VP`)**, on a Developer ID Application
+certificate valid until **2031-08-27**. Not Tee Time Trainer: Developer ID
+creation is restricted to the team's Account Holder, which Fellipe is on Bossa
+Nova and is not on Tee Time Trainer.
+
+**No API key can create one, on any team, at any role.** Both certificate types
+were tried against both teams and all four returned:
 
 ```
-POST /v1/certificates  DEVELOPER_ID_APPLICATION -> 403
+POST /v1/certificates -> 403
 "This operation can only be performed by the Account Holder."
 ```
 
-That is Apple's rule, not a permissions gap, so it cannot be automated. Steps are
-in the release notes below.
+It is a human-in-the-portal step by design. Do not spend time automating it.
+
+**The private key lives at `~/.app-store/lidless/devid.key` and nowhere else.**
+It never left this machine, which is the point, and the certificate is worthless
+without it. Losing it costs one of the five Developer ID slots the team gets.
+Back it up.
+
+Expect a one-time keychain access prompt the first time `codesign` reaches for
+the key on any machine. The first build fails, the second succeeds; that is the
+prompt, not a bug.
+
+## Distribution
+
+Releases go out as **GitHub Releases**, not committed to the repo:
+
+```sh
+ASC_ISSUER=<issuer-uuid> ./scripts/release.sh
+gh release create v1.0 dist/Lidless.dmg --title "Lidless 1.0" --notes "..."
+```
+
+Teammates download the DMG, drag to Applications, and open it. The notarization
+ticket is stapled, so it opens with no warning even on a Mac that is offline.
 
 ## Known limits
 

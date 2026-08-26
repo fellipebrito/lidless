@@ -11,8 +11,8 @@ set -euo pipefail
 HERE="$(cd "$(dirname "$0")" && pwd)"
 APPDIR="$HERE/../app"
 DIST="$HERE/../dist"
-TEAM="R29263A4RW"
-KEY_ID="CV35ZGBL62"
+TEAM="AR7DXKP4VP"
+KEY_ID="<ASC_KEY_ID>"
 # The .p8 and the issuer are NOT in this repo. The key lives at
 # ~/.appstoreconnect/private_keys/ and the issuer is passed in the environment.
 : "${ASC_ISSUER:?set ASC_ISSUER to the App Store Connect issuer id}"
