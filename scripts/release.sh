@@ -11,11 +11,13 @@ set -euo pipefail
 HERE="$(cd "$(dirname "$0")" && pwd)"
 APPDIR="$HERE/../app"
 DIST="$HERE/../dist"
+# The team id is public by nature: it is embedded in every signed binary. The
+# App Store Connect key id and issuer are not, and neither is the .p8 itself,
+# which stays at ~/.appstoreconnect/private_keys/ and never enters this repo.
 TEAM="AR7DXKP4VP"
-KEY_ID="<ASC_KEY_ID>"
-# The .p8 and the issuer are NOT in this repo. The key lives at
-# ~/.appstoreconnect/private_keys/ and the issuer is passed in the environment.
+: "${ASC_KEY_ID:?set ASC_KEY_ID to the App Store Connect key id}"
 : "${ASC_ISSUER:?set ASC_ISSUER to the App Store Connect issuer id}"
+KEY_ID="$ASC_KEY_ID"
 
 UNSIGNED=0
 [ "${1:-}" = "--unsigned" ] && UNSIGNED=1

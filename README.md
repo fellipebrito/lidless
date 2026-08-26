@@ -59,7 +59,7 @@ app is a system-level assertion, so check the system.
 ## Releasing
 
 ```sh
-ASC_ISSUER=<issuer-uuid> ./scripts/release.sh
+ASC_KEY_ID=<key-id> ASC_ISSUER=<issuer-uuid> ./scripts/release.sh
 ```
 
 Builds, signs with Developer ID, notarizes, staples, and writes `dist/Lidless.dmg`.
@@ -97,7 +97,7 @@ prompt, not a bug.
 Releases go out as **GitHub Releases**, not committed to the repo:
 
 ```sh
-ASC_ISSUER=<issuer-uuid> ./scripts/release.sh
+ASC_KEY_ID=<key-id> ASC_ISSUER=<issuer-uuid> ./scripts/release.sh
 gh release create v1.0 dist/Lidless.dmg --title "Lidless 1.0" --notes "..."
 ```
 
