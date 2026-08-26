@@ -1,0 +1,40 @@
+name: Lidless
+options:
+  bundleIdPrefix: app.lidless
+  deploymentTarget:
+    macOS: "14.0"
+  createIntermediateGroups: true
+settings:
+  base:
+    SWIFT_VERSION: "6.0"
+    MARKETING_VERSION: "1.0"
+    CURRENT_PROJECT_VERSION: "1"
+    DEVELOPMENT_TEAM: R29263A4RW
+    CODE_SIGN_STYLE: Manual
+targets:
+  Lidless:
+    type: application
+    platform: macOS
+    sources:
+      - Sources
+      - Resources
+    info:
+      path: Info.plist
+      properties:
+        CFBundleName: Lidless
+        CFBundleDisplayName: Lidless
+        CFBundleShortVersionString: "$(MARKETING_VERSION)"
+        CFBundleVersion: "$(CURRENT_PROJECT_VERSION)"
+        # No Dock icon and no menu bar: it lives only in the status bar. It stays a
+        # real .app, so Spotlight still finds it.
+        LSUIElement: true
+        LSMinimumSystemVersion: "14.0"
+        NSHumanReadableCopyright: "Built by Fellipe Brito"
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: app.lidless.Lidless
+        PRODUCT_NAME: Lidless
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        ENABLE_HARDENED_RUNTIME: YES
+        ENABLE_USER_SCRIPT_SANDBOXING: YES
+        COMBINE_HIDPI_IMAGES: YES

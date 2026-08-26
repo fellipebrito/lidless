@@ -1,0 +1,4 @@
+dist/
+app/build/
+app/Lidless.xcodeproj/
+.DS_Store
