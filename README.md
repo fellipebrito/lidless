@@ -40,16 +40,17 @@ xcodebuild -project Lidless.xcodeproj -scheme Lidless -configuration Release \
 open build/dd/Build/Products/Release/Lidless.app
 ```
 
-It registers itself as a login item on first launch, with the hold **off**. An app
-that silently changes a laptop's power behaviour at login is how a battery dies
-in a bag.
+It registers itself as a login item on first launch. The Eye opens on every
+launch of the app, including that silent one at login — one click on the menu
+bar icon closes it again, and it stays closed until opened the same way.
 
 ### Proving it works
 
-The menu bar item cannot be clicked from a script, so there is a launch hook:
+The menu bar item cannot be clicked from a script, but the Eye is open as soon
+as the app launches, so no hook is needed to trigger it:
 
 ```sh
-open -a Lidless --args --open-the-eye
+open -a Lidless
 pmset -g assertions | grep Lidless
 ```
 

@@ -33,11 +33,10 @@ final class Hold {
         ) { [weak self] _ in
             MainActor.assumeIsolated { self?.release(because: "the Mac slept") }
         }
-        // Verification hook, same idea as CENTURY's -screen flag. It lives here and
-        // not on the menu content, because `.menuBarExtraStyle(.window)` builds that
-        // view lazily on first click, so anything attached to it never runs at launch.
-        //   open -a Lidless --args --open-the-eye
-        if CommandLine.arguments.contains("--open-the-eye") { start() }
+        // The Eye opens on every launch, including the silent one at login. The
+        // user can still close it with one click from the menu at any time; this
+        // just changes what "one click" is for, from opening to closing.
+        start()
     }
 
     func start() {
